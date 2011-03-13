@@ -11,7 +11,7 @@
 #import "Downloads.h"
 
 @implementation FlameNETViewController
-@synthesize webView, addressBar, activityIndicator;
+@synthesize webView, addressBar, activityIndicator, actionButton, string;
 
 // Remember to bump version number.
 
@@ -113,10 +113,11 @@
 		void (^completionHandler)(UIPrintInteractionController *, BOOL, NSError *) =
 		^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
 			if(!completed && error){
+				NSString *errorMsg2 = [NSString stringWithFormat:@"FAILED! Due to error in domain %@ with error code %u", error.domain, error.code];
 				UIAlertView *error2 = [[UIAlertView alloc]
 									   initWithTitle:@"Error!"
-									   message:@"FAILED! Due to error in domain %@ with error code %u", error.domain, error.code, nil
-									   delegate:self
+									   message:errorMsg2
+									   delegate: self
 									   cancelButtonTitle:@"Ok"
 									   otherButtonTitles:nil];
 				[error2 show];
